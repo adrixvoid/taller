@@ -1,11 +1,22 @@
-import React from "react";
-import './App.css';
-import Router from "./utils/router";
-import DashBoardPage from "./pages/dashboard/DashBoardPage";
+import React from 'react';
+import { Provider as FetchProvider } from 'use-http';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { BrowserRouter } from 'react-router-dom';
+import Router from './utils/router';
+import theme from './utils/theme';
+import MainLayout from './components/MainLayout';
 
 function App() {
   return (
-    <DashBoardPage />
+    <ThemeProvider theme={theme}>
+      <FetchProvider url='https://jsonplaceholder.typicode.com'>
+        <BrowserRouter>
+          <MainLayout>
+            <Router />
+          </MainLayout>
+        </BrowserRouter>
+      </FetchProvider>
+    </ThemeProvider>
   );
 }
 
